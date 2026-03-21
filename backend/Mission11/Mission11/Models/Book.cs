@@ -1,5 +1,7 @@
 namespace Mission11.Models;
 
+// This class represents a single row in the Books table.
+// EF Core uses these properties to map database columns to C# fields.
 public class Book
 {
     public int BookID { get; set; }

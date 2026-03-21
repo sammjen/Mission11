@@ -8,9 +8,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Register BookstoreContext with the SQLite provider.
+// The connection string ("Data Source=Bookstore.sqlite") is read from appsettings.json.
 builder.Services.AddDbContext<BookstoreContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("BookstoreConnection")));
 
+// Configure CORS (Cross-Origin Resource Sharing).
+// Browsers block requests between different ports by default. Since the React app
+// runs on port 5173 and the API runs on port 7023, we must explicitly allow it.
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp", policy =>
@@ -32,6 +37,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+// Apply the CORS policy we defined above — must come before UseAuthorization.
 app.UseCors("AllowReactApp");
 
 app.UseAuthorization();
