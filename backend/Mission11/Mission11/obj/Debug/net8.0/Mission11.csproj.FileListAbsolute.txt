@@ -125,3 +125,4 @@
 /Users/samjenson/RiderProjects/Mission11/backend/Mission11/Mission11/obj/Debug/net8.0/Mission11.pdb
 /Users/samjenson/RiderProjects/Mission11/backend/Mission11/Mission11/obj/Debug/net8.0/Mission11.genruntimeconfig.cache
 /Users/samjenson/RiderProjects/Mission11/backend/Mission11/Mission11/obj/Debug/net8.0/ref/Mission11.dll
+/Users/samjenson/RiderProjects/Mission11/backend/Mission11/Mission11/obj/Debug/net8.0/Mission11.sourcelink.json
