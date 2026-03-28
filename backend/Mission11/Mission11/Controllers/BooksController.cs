@@ -19,27 +19,33 @@ public class BooksController : ControllerBase
         _context = context;
     }
 
-    // GET /api/books?page=1&pageSize=5&sortAscending=true
-    // All three parameters are optional — the defaults are used if not provided.
+    // GET /api/books?page=1&pageSize=5&sortAscending=true&category=Biography
+    // All parameters are optional — the defaults are used if not provided.
     [HttpGet]
     public async Task<IActionResult> GetBooks(
         [FromQuery] int page = 1,
         [FromQuery] int pageSize = 5,
-        [FromQuery] bool sortAscending = true)
+        [FromQuery] bool sortAscending = true,
+        [FromQuery] string? category = null)
     {
         // Start with the full Books table as a queryable (no DB call yet).
         var query = _context.Books.AsQueryable();
+
+        // If a category was specified, filter to only books in that category.
+        if (!string.IsNullOrEmpty(category))
+        {
+            query = query.Where(b => b.Category == category);
+        }
 
         // Apply sort order based on the sortAscending parameter.
         query = sortAscending
             ? query.OrderBy(b => b.Title)
             : query.OrderByDescending(b => b.Title);
 
-        // Get the total number of books (used by the frontend to calculate page count).
+        // Get the total number of books matching the filter (used to calculate page count).
         var totalCount = await query.CountAsync();
 
         // Skip past previous pages, then take only the current page's worth of books.
-        // e.g. page 2 with pageSize 5: skip 5, take 5.
         var books = await query
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
@@ -47,5 +53,18 @@ public class BooksController : ControllerBase
 
         // Return both the books and the total count as a JSON object.
         return Ok(new { books, totalCount });
+    }
+
+    // GET /api/books/categories — returns the distinct list of categories for the filter UI.
+    [HttpGet("categories")]
+    public async Task<IActionResult> GetCategories()
+    {
+        var categories = await _context.Books
+            .Select(b => b.Category)
+            .Distinct()
+            .OrderBy(c => c)
+            .ToListAsync();
+
+        return Ok(categories);
     }
 }
