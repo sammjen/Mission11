@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import BookList from './components/BookList';
 import Cart from './components/Cart';
+import AdminBooks from './components/AdminBooks';
 import type { Book, CartItem } from './types';
 
-function App() {
+function ShopApp() {
   // cart holds all items the user has added. It persists as long as the app is running.
   const [cart, setCart] = useState<CartItem[]>([]);
 
@@ -60,6 +62,17 @@ function App() {
         />
       )}
     </>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<ShopApp />} />
+        <Route path="/adminbooks" element={<AdminBooks />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

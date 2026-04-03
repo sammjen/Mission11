@@ -67,4 +67,38 @@ public class BooksController : ControllerBase
 
         return Ok(categories);
     }
+
+    // POST /api/books — adds a new book to the database.
+    [HttpPost]
+    public async Task<IActionResult> AddBook([FromBody] Book book)
+    {
+        _context.Books.Add(book);
+        await _context.SaveChangesAsync();
+        return CreatedAtAction(nameof(GetBooks), new { id = book.BookID }, book);
+    }
+
+    // PUT /api/books/{id} — updates an existing book by ID.
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateBook(int id, [FromBody] Book book)
+    {
+        if (id != book.BookID)
+            return BadRequest();
+
+        _context.Entry(book).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+        await _context.SaveChangesAsync();
+        return NoContent();
+    }
+
+    // DELETE /api/books/{id} — deletes a book by ID.
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteBook(int id)
+    {
+        var book = await _context.Books.FindAsync(id);
+        if (book == null)
+            return NotFound();
+
+        _context.Books.Remove(book);
+        await _context.SaveChangesAsync();
+        return NoContent();
+    }
 }
