@@ -126,3 +126,4 @@
 /Users/samjenson/RiderProjects/Mission11/backend/Mission11/Mission11/obj/Release/net8.0/Mission11.pdb
 /Users/samjenson/RiderProjects/Mission11/backend/Mission11/Mission11/obj/Release/net8.0/Mission11.genruntimeconfig.cache
 /Users/samjenson/RiderProjects/Mission11/backend/Mission11/Mission11/obj/Release/net8.0/ref/Mission11.dll
+/Users/samjenson/RiderProjects/Mission11/backend/Mission11/Mission11/bin/Release/net8.0/Bookstore.sqlite
