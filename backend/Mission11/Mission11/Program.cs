@@ -20,7 +20,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp", policy =>
     {
-        policy.WithOrigins("https://localhost:5173", "http://localhost:5173")
+        policy.WithOrigins("https://localhost:5173", "http://localhost:5173", "https://mango-beach-02c27d91e.6.azurestaticapps.net")
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
