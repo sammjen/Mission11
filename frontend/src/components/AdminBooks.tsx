@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { Book } from '../types';
 
-const API = 'http://localhost:5206/api/books';
+const API = 'https://bookstore-api-samjenson-dmaxcea0c3hbfcde.centralus-01.azurewebsites.net/api/books';
 
 // Empty book template used when opening the "Add" form.
 const emptyBook: Omit<Book, 'bookID'> = {

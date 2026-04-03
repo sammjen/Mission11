@@ -14,7 +14,7 @@ interface BooksResponse {
   totalCount: number;
 }
 
-const API_BASE = 'https://localhost:7023';
+const API_BASE = 'https://bookstore-api-samjenson-dmaxcea0c3hbfcde.centralus-01.azurewebsites.net';
 
 function BookList({ cart, addToCart, goToCart, initialPage }: BookListProps) {
   const [books, setBooks] = useState<Book[]>([]);
